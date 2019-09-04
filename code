@@ -1,0 +1,78 @@
+int a[10][7]={ {1,1,1,1,1,0,1},//0
+               {0,1,1,0,0,0,0},//1
+               {1,1,0,1,1,1,0},//2
+               {1,1,1,1,0,1,0},//3
+               {0,1,1,0,0,1,1},//4
+               {1,0,1,1,0,1,1},//5
+               {1,0,1,1,1,1,1},//6
+               {1,1,1,0,0,0,0},//7
+               {1,1,1,1,1,1,1},//8
+               {1,1,1,1,0,1,1}//9
+             };
+void nm(int);
+int red1 = 6;
+int yellow1 = 5;
+int green1 = 4;
+int red2 = 3;
+int yellow2 = 2;
+int green2 = 1;
+int co=1;
+void setup() {
+  pinMode(13,OUTPUT);
+  pinMode(12,OUTPUT);
+  pinMode(11,OUTPUT);
+  pinMode(10,OUTPUT);
+  pinMode(9,OUTPUT);
+  pinMode(8,OUTPUT);
+  pinMode(7,OUTPUT);  
+  
+  pinMode(red1,OUTPUT);
+  pinMode(yellow1,OUTPUT);
+  pinMode(green1,OUTPUT);
+  pinMode(red2,OUTPUT);
+  pinMode(yellow2,OUTPUT);
+  pinMode(green2,OUTPUT);
+}
+void loop() {  
+  digitalWrite(red2,HIGH);
+  digitalWrite(red1,LOW);
+  digitalWrite(green2,LOW);
+  digitalWrite(yellow2,LOW);
+  digitalWrite(green1,HIGH);
+  meet();
+  digitalWrite(red2,LOW);
+  digitalWrite(yellow1,LOW);
+  digitalWrite(green2,HIGH);
+  digitalWrite(green1,LOW);
+  digitalWrite(red1,HIGH);
+  meet();  
+}
+void nm(int num)
+{
+  if(num==3&&co==1)
+  {
+   digitalWrite(green1,HIGH);
+   digitalWrite(yellow1,HIGH);
+   co=2;
+  }
+  else if(num==3&&co==2)
+  {
+   digitalWrite(yellow2,HIGH);
+   co=1;
+  }
+  else{}
+  int pin=7;
+  for(int j=0;j<10;j++)
+  {
+     digitalWrite(pin,a[num][j]);
+     pin++;  
+  }  
+}
+void meet(){
+    for(int c=10;c>0;c--)
+   {
+      delay(1000);
+      nm(c-1); 
+   }
+   delay(1000);
+} 
